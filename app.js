@@ -2,7 +2,7 @@
  * API ENDPOINTS (EDIT HERE)
  *******************************/
 const captionApiURL = "https://454b9ae11fb3.ngrok-free.app/caption";  // BLIP API
-const t2iApiURL = "https://tripodic-severable-laquita.ngrok-free.dev/generate"; // CLIP API
+const t2iApiURL = "https://monosymmetric-rodger-cytologically.ngrok-free.dev/generate"; // CLIP API
 
 
 /*******************************
