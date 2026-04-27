@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DualMode AI — Sign In</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-dark">
+  <div class="center-wrap">
+    <div class="card auth-card">
+      <div class="brand">
+        <img src="assets/logo.png" alt="logo" class="logo" onerror="this.style.display='none'">
+        <h1>DualMode AI</h1>
+        <p class="muted">Image ↔ Text — Generate & Interpret on the web</p>
+      </div>
+
+      <form id="signin-form" class="form">
+        <label>Full name</label>
+        <input id="name" type="text" placeholder="Your full name" required />
+
+        <label>Email</label>
+        <input id="email" type="email" placeholder="you@example.com" required />
+
+        <div class="row">
+          <button type="submit" class="btn primary">Sign In</button>
+          <button id="demo-btn" type="button" class="btn outline">Try Demo</button>
+        </div>
+      </form>
+
+      <p class="footer-text muted">By continuing you agree to use this prototype responsibly.</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Simple sign-in → store name in session storage and open dashboard
+    document.getElementById('signin-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!name || !email) return alert('Please enter name and email.');
+      sessionStorage.setItem('dm_user_name', name);
+      sessionStorage.setItem('dm_user_email', email);
+      window.location.href = 'dashboard.html';
+    });
+
+    // Demo quick-start (skip sign-in)
+    document.getElementById('demo-btn').addEventListener('click', () => {
+      sessionStorage.setItem('dm_user_name','Demo User');
+      sessionStorage.setItem('dm_user_email','demo@example.com');
+      sessionStorage.setItem('dm_demo_mode','1');
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+</html>

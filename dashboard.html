@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DualMode AI — Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-dark">
+  <header class="topbar">
+    <div class="left">
+      <img src="assets/logo.png" alt="logo" class="logo-small" onerror="this.style.display='none'">
+      <h2>DualMode AI</h2>
+    </div>
+    <div class="right">
+      <span id="welcome" class="muted">Welcome</span>
+      <button id="signout" class="btn outline small">Sign out</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h3>Dual Mode — Image ↔ Text</h3>
+      <p class="muted">Choose a module below. You can generate images from text or get captions for uploaded images.</p>
+    </section>
+
+    <section class="grid">
+      <!-- Text to Image -->
+      <div class="module card">
+        <h4>Text → Image</h4>
+        <p class="muted">Write a prompt and generate an AI image.</p>
+
+        <textarea id="t2i-prompt" placeholder="e.g. A futuristic city at sunset with flying cars..." rows="4"></textarea>
+
+        <div class="row">
+          <button id="generate-btn" class="btn primary">Generate Image</button>
+          <div id="t2i-spinner" class="loader hidden"></div>
+        </div>
+
+        <div class="result-box" id="t2i-result">
+          <img id="t2i-img" src="" alt="Generated result" />
+          <div class="meta">
+            <small id="t2i-info" class="muted"></small>
+            <button id="download-t2i" class="btn outline small">Download</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image to Text (Caption) -->
+      <div class="module card">
+        <h4>Image → Text</h4>
+        <p class="muted">Upload an image and get a caption using BLIP.</p>
+
+        <input id="image-upload" type="file" accept="image/*" />
+
+        <div class="row">
+          <button id="caption-btn" class="btn primary">Get Caption</button>
+          <div id="cap-spinner" class="loader hidden"></div>
+        </div>
+
+        <div class="result-box" id="cap-result">
+          <img id="cap-preview" src="" alt="Preview" />
+          <div class="meta">
+            <p id="cap-text" class="muted">Caption will appear here</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer muted">DualMode AI — Prototype • Built by your team</footer>
+
+  <script src="app.js"></script>
+
+  <script>
+    const name = sessionStorage.getItem('dm_user_name');
+    if (!name) {
+      window.location.href = 'index.html';
+    } else {
+      document.getElementById('welcome').innerText = `Hi, ${name}`;
+    }
+
+    document.getElementById('signout').addEventListener('click', () => {
+      sessionStorage.clear();
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
